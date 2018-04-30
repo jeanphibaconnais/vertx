@@ -22,7 +22,7 @@ public class TestServer extends AbstractVerticle {
 					HttpRequest<Buffer> request = client.get(8081, "localhost", "/");
 
 					// Le send ne va pas attendre la réponse mais transmettre un évènement non bloquant.
-					request.send(ar -> {
+					request.send(ar -> { // async result contenant une réponse ou une error.
 						if (ar.succeeded()) {
 							String message = ar.result().bodyAsJsonObject().getString("message");
 							req.response().end(message);
